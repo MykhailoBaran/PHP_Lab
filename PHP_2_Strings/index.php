@@ -11,11 +11,11 @@
 <pre>
     <?php
 
-    // 1
+    // 1 ================================================================
     $var = "var_test_text";
     echo str_replace("_t", "T", $var) . "\n";
 
-    // 2
+    // 2 ================================================================
     $reversFunc = function ($value){
         preg_match_all('/./us', $value, $array);
         return join("", array_reverse($array[0]));
@@ -26,7 +26,7 @@
     print_r(join(" ", $newArray));
     echo "\n";
 
-    // 3
+    // 3 ================================================================
     $a = [342, 55, 33, 123, 66, 63, 9];
     $callable = function ($value){
         $v = substr_count(strval($value), "3");
@@ -36,7 +36,7 @@
     };
     array_walk($a, $callable);
 
-    // 4
+    // 4 ================================================================
     $reduce = function ($carry , $item){
         $carry += substr_count(strval($item), "3");
         return $carry;
@@ -44,9 +44,27 @@
     $a = [342, 55, 33, 123, 66, 63, 9];
     echo array_reduce($a, $reduce, 0) . "\n";
 
-    // 5
+    // 5 ================================================================
+    function endsWith($haystack, $needle)
+    {
+        return (substr($haystack, -1) === $needle);
+    }
 
-    // 6
+    function newBandName ($str){
+        $first = substr($str, 0, 1);
+        if (endsWith($str, $first)){
+            $res = $str . substr($str, 1);
+            return ucfirst($res);
+        } else {
+            return "The " . ucfirst($str);
+        }
+    }
+
+    echo newBandName("dolphin") . "\n";
+    echo newBandName("alaska") . "\n";
+    echo newBandName("europe") . "\n";
+
+    // 6 ================================================================
     function replace($inputStr){
         $repl = ["A" => "T", "C" => "G", "T" => "A", "G" => "C"];
         return strtr($inputStr, $repl);
