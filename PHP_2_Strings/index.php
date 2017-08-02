@@ -42,9 +42,17 @@
         return $carry;
     };
     $a = [342, 55, 33, 123, 66, 63, 9];
-
     echo array_reduce($a, $reduce, 0) . "\n";
 
+    // 5
+
+    // 6
+    function replace($inputStr){
+        $repl = ["A" => "T", "C" => "G", "T" => "A", "G" => "C"];
+        return strtr($inputStr, $repl);
+    }
+    echo replace("ATTGC") . "\n";
+    echo replace("GTAT") . "\n";
     ?>
 </pre>
 </body>
