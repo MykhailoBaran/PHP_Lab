@@ -16,14 +16,36 @@ function convert($array) {
 echo join(", ", convert([1, 3, 2, 4])) . "\n";
 
 // 2 ==========================================================================
+function findMid($array, $count = 3) {
+    $avg = array_sum($array) / count($array);
+    echo $avg;
+    $middle = [];
+    $indexs = [];
+    for ($i = 0; $i < $count; $i++) {
+        $min = 0;
+        foreach ($array as $key => $value) {
+            if (in_array($key, $indexs, true)) {
+                continue;
+            }
+            if (abs($array[$min] - $avg) > abs($value - $avg)) {
+                $min = $key;
+            }
+        }
+        $middle[] = $array[$min];
+        $indexs[] = $min;
+    }
+    return $middle;
+}
 function secondTask($array) {
     sort($array);
 
     $min = array_slice($array, 0, 3);
     $max = array_slice($array, -3);
 
-    $avgIndex = count($array) / 2;
-    $middle = [$array[$avgIndex - 1], $array[$avgIndex], $array[$avgIndex + 1]];
+    /*$avg = count($array) / 2;
+    $middle = [$array[$avg - 1], $array[$avg], $array[$avg + 1]];*/
+
+    $middle = findMid($array);
 
     echo "min = " . join(", ", $min) . "\n";
     echo "max = " . join(", ", $max). "\n";
@@ -31,6 +53,7 @@ function secondTask($array) {
 }
 $temperatures = array(33, 15, 17, 20, 23, 23, 28, 40, 21, 19, 31, 18, 30, 31, 28, 23, 19, 28, 27, 30, 39, 17, 17, 20, 19, 23, 28, 30, 34, 28);
 secondTask($temperatures);
+
 
 // 3 ==========================================================================
 $books = [
